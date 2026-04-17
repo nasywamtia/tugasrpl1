@@ -1,4 +1,5 @@
 <?php
+require_once "helper/terbilang.php";
 $teks = null;
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
