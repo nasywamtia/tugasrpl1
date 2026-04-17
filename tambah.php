@@ -52,7 +52,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             </div>
         <?php endif; ?>
         <br>
-        <a href="index.php">Kembali</a>
+        <a href="index.php"><- Kembali</a>
     </div>
 
     <script>
