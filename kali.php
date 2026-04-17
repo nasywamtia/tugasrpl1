@@ -16,7 +16,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     }
 
     if (count($clean) > 0) {
-        $teks = implode(" x ", $clean) . " = " . $total;
+        $teks = implode(" x ", $clean) . " = " . $total. " ( " . terbilang($total) . " )";
     }
 }
 ?>

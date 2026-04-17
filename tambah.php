@@ -16,13 +16,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     }
 
     if (count($clean) > 0) {
-        $teks = implode(" + ", $clean) . " = " . $total;
+        $teks = implode(" + ", $clean) . " = " . $total . " ( " . terbilang($total) . " )";
     }
 }
 ?>
 
 <!DOCTYPE html>
 <html lang="id">
+
 <head>
     <meta charset="UTF-8">
     <title>Kalkulator Dinamis</title>
