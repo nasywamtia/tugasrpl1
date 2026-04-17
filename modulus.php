@@ -33,7 +33,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
 <body>
     <div class="card">
-        <h1>Penjumlahan ( + )</h1>
+        <h1>Modulus ( % )</h1>
         <form method="post">
             <div id="container">
                 <div class="row">
