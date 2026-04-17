@@ -6,18 +6,23 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $angka = $_POST['angka'] ?? [];
 
     $clean = [];
-    $total = 0;
+    $total = null;
 
     foreach ($angka as $val) {
         if ($val === '' || !is_numeric($val)) continue;
 
         $num = (float)$val;
         $clean[] = $num;
-        $total *= $num;
+
+        if ($total === null) {
+            $total = $num; // angka pertama jadi awal
+        } else {
+            $total *= $num; // baru dikalikan berikutnya
+        }
     }
 
     if (count($clean) > 0) {
-        $teks = implode(" x ", $clean) . " = " . $total. " ( " . terbilang($total) . " )";
+        $teks = implode(" x ", $clean) . " = " . $total . " ( " . terbilang($total) . " )";
     }
 }
 ?>
