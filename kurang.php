@@ -1,69 +1,59 @@
 <?php
-require_once 'helper.php';
+$teks = null;
 
-$hasil=null;$input=[];$teks="";
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    $angka = $_POST['angka'] ?? [];
 
-if($_POST){
-$input=$_POST['angka'];
-$hasil=(float)$input[0];
+    $clean = [];
+    $total = 0;
 
-for($i=1;$i<count($input);$i++){
-    $hasil-=$input[$i];
-}
+    foreach ($angka as $val) {
+        if ($val === '' || !is_numeric($val)) continue;
 
-$teks=$hasil<0?"Minus ".terbilang(abs($hasil)):terbilang($hasil);
+        $num = (float)$val;
+        $clean[] = $num;
+        $total -= $num;
+    }
+
+    if (count($clean) > 0) {
+        $teks = implode(" - ", $clean) . " = " . $total;
+    }
 }
 ?>
+
 <!DOCTYPE html>
-<html>
+<html lang="id">
+
 <head>
-<style>
-body{font-family:Arial;background:#f3f4f6;display:flex;justify-content:center;align-items:center;height:100vh}
-.card{background:#fff;padding:25px;border-radius:12px;width:380px;box-shadow:0 6px 15px rgba(0,0,0,.1)}
-h2{text-align:center;color:#ef4444}
-.input-group{display:flex;gap:5px;margin-bottom:8px}
-input{flex:1;padding:8px;border-radius:6px;border:1px solid #ccc}
-input[type=number]::-webkit-inner-spin-button{opacity:1}
-button{border:none;padding:10px;border-radius:6px;color:#fff}
-.tambah{background:#3b82f6;width:100%}
-.hitung{background:#ef4444;width:100%;margin-top:8px}
-.hapus{background:#ef4444}
-.hasil{margin-top:10px;padding:10px;background:#fef2f2;border-radius:6px}
-</style>
+    <meta charset="UTF-8">
+    <title>Kalkulator Dinamis</title>
+    <link rel="stylesheet" href="style.css">
 </head>
+
 <body>
-
-<div class="card">
-<h2>Pengurangan (-)</h2>
-
-<form method="post">
-<div id="inputs">
-<div class="input-group"><input name="angka[]" type="number" step="any" required></div>
-<div class="input-group"><input name="angka[]" type="number" step="any" required></div>
-</div>
-
-<button type="button" class="tambah" onclick="add()">+ Tambah</button>
-<button class="hitung">Hitung</button>
-</form>
-
-<?php if($hasil!==null): ?>
-<div class="hasil"><?= implode(" - ",$input) ?> = <b><?= number_format($hasil,0,',','.') ?></b> (<?= $teks ?>)</div>
-<?php endif; ?>
-
-<a href="index.php">← Kembali</a>
-</div>
-
-<script>
-function add(){
-let g=document.createElement("div");g.className="input-group";
-let i=document.createElement("input");
-i.name="angka[]";i.type="number";i.step="any";i.required=true;
-let b=document.createElement("button");
-b.innerText="X";b.type="button";b.className="hapus";b.onclick=()=>g.remove();
-g.appendChild(i);g.appendChild(b);
-document.getElementById("inputs").appendChild(g);
-}
-</script>
-
+    <div class="card">
+        <h1>Pengurangan ( - )</h1>
+        <form method="post">
+            <div id="container">
+                <div class="row">
+                    <input type="number" step="any" name="angka[]" required placeholder="Masukkan angka">
+                </div>
+                <div class="row">
+                    <input type="number" step="any" name="angka[]" required placeholder="Masukkan angka">
+                </div>
+            </div>
+            <button type="button" class="add" onclick="tambahInput()">+ Tambah Input</button>
+            <button type="submit" class="submit">Hitung</button>
+        </form>
+        <?php if ($teks !== null): ?>
+            <div class="result">
+                <?= htmlspecialchars($teks) ?>
+            </div>
+        <?php endif; ?>
+        <br>
+        <a href="index.php">Kembali</a>
+    </div>
+    <script src="script.js"></script>
 </body>
+
 </html>
