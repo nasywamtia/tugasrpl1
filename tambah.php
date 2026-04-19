@@ -33,7 +33,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 <head>
     <meta charset="UTF-8">
     <title>Kalkulator Dinamis</title>
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="assets/style.css">
 </head>
 
 <body>
@@ -59,32 +59,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         <br>
         <a href="index.php">← Kembali</a>
     </div>
-
-    <script>
-        function tambahInput() {
-            const container = document.getElementById('container');
-            const row = document.createElement('div');
-            row.className = 'row';
-            const input = document.createElement('input');
-            input.type = 'number';
-            input.step = 'any';
-            input.name = 'angka[]';
-            input.placeholder = 'Masukkan angka';
-            input.required = true;
-            const btn = document.createElement('button');
-            btn.type = 'button';
-            btn.className = 'remove';
-            btn.innerText = 'Hapus';
-            btn.onclick = function() {
-                if (!confirm("Yakin mau hapus input ini?")) return;
-                container.removeChild(row);
-            };
-            row.appendChild(input);
-            row.appendChild(btn);
-            container.appendChild(row);
-        }
-    </script>
-
+    <script src="assets/script.js"></script>
 </body>
 
 </html>

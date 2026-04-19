@@ -33,7 +33,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 <head>
     <meta charset="UTF-8">
     <title>Kalkulator Dinamis</title>
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="assets/style.css">
 </head>
 
 <body>
@@ -59,7 +59,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         <br>
         <a href="index.php">← Kembali</a>
     </div>
-    <script src="script.js"></script>
+    <script src="assets/script.js"></script>
 </body>
 
 </html>

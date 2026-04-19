@@ -1,5 +1,6 @@
 <?php
-function terbilang($angka) {
+function terbilang($angka)
+{
 
     if ($angka == 0) return "Nol";
 
@@ -10,15 +11,22 @@ function terbilang($angka) {
     $angka = abs((int)$angka);
 
     $huruf = [
-        "", "Satu", "Dua", "Tiga", "Empat",
-        "Lima", "Enam", "Tujuh", "Delapan",
-        "Sembilan", "Sepuluh", "Sebelas"
+        "",
+        "Satu",
+        "Dua",
+        "Tiga",
+        "Empat",
+        "Lima",
+        "Enam",
+        "Tujuh",
+        "Delapan",
+        "Sembilan",
+        "Sepuluh",
+        "Sebelas"
     ];
 
     // helper biar gak nambah "Nol"
-    function gabung($depan, $belakang) {
-        return $belakang == 0 ? $depan : $depan . " " . terbilang($belakang);
-    }
+
 
     if ($angka < 12)
         return $huruf[$angka];
@@ -63,4 +71,8 @@ function terbilang($angka) {
     }
 
     return "Angka terlalu besar";
+}
+function gabung($depan, $belakang)
+{
+    return $belakang == 0 ? $depan : $depan . " " . terbilang($belakang);
 }
