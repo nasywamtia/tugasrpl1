@@ -17,7 +17,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         if ($total === null) {
             $total = $num; // angka pertama jadi awal
         } else {
-            $total %= $num; // baru dihitung modulus berikutnya
+            $total = fmod($total, $num); // baru dihitung modulus berikutnya
         }
     }
 

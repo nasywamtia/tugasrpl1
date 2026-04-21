@@ -1,11 +1,25 @@
 <?php
 function terbilang($angka)
 {
-
     if ($angka == 0) return "Nol";
 
     if ($angka < 0) {
         return "Minus " . terbilang(abs($angka));
+    }
+
+    // cek apakah ada desimal
+    if (strpos((string)$angka, '.') !== false) {
+        list($depan, $belakang) = explode('.', (string)$angka);
+
+        $hasil = terbilang((int)$depan) . " Koma";
+
+        // baca tiap digit di belakang koma
+        $digit = str_split($belakang);
+        foreach ($digit as $d) {
+            $hasil .= " " . terbilang((int)$d);
+        }
+
+        return $hasil;
     }
 
     $angka = abs((int)$angka);
@@ -24,9 +38,6 @@ function terbilang($angka)
         "Sepuluh",
         "Sebelas"
     ];
-
-    // helper biar gak nambah "Nol"
-
 
     if ($angka < 12)
         return $huruf[$angka];
@@ -72,6 +83,7 @@ function terbilang($angka)
 
     return "Angka terlalu besar";
 }
+
 function gabung($depan, $belakang)
 {
     return $belakang == 0 ? $depan : $depan . " " . terbilang($belakang);

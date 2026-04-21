@@ -1,29 +1,33 @@
 <?php
 require_once "helper/terbilang.php";
 $teks = null;
+try {
+    //code...
+    if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+        $angka = $_POST['angka'] ?? [];
 
-if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    $angka = $_POST['angka'] ?? [];
+        $clean = [];
+        $total = null;
 
-    $clean = [];
-    $total = null;
+        foreach ($angka as $val) {
+            if ($val === '' || !is_numeric($val)) continue;
 
-    foreach ($angka as $val) {
-        if ($val === '' || !is_numeric($val)) continue;
+            $num = (float)$val;
+            $clean[] = $num;
 
-        $num = (float)$val;
-        $clean[] = $num;
+            if ($total === null) {
+                $total = $num; // angka pertama jadi awal
+            } else {
+                $total /= $num; // baru dibagi berikutnya
+            }
+        }
 
-        if ($total === null) {
-            $total = $num; // angka pertama jadi awal
-        } else {
-            $total /= $num; // baru dibagi berikutnya
+        if (count($clean) > 0) {
+            $teks = implode(" ÷ ", $clean) . " = " . $total . " ( " . terbilang($total) . " )";
         }
     }
-
-    if (count($clean) > 0) {
-        $teks = implode(" ÷ ", $clean) . " = " . $total . " ( " . terbilang($total) . " )";
-    }
+} catch (DivisionByZeroError $th) {
+    $teks = "Angka tidak bisa dibagi dengan 0 (Nol)!";
 }
 ?>
 
