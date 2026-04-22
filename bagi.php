@@ -18,7 +18,7 @@ try {
             if ($total === null) {
                 $total = $num; // angka pertama jadi awal
             } else {
-                $total /= $num; // baru dibagi berikutnya
+                $total = fdiv($total, $num); // baru dibagi berikutnya
             }
         }
 
